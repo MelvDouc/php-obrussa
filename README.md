@@ -1,4 +1,4 @@
-# Test Framework
+# Obrussa
 
 A simple PHP unit test library meant to resemble the native test module from NodeJS.
 
@@ -49,6 +49,6 @@ Output:
 ✓ instanceof
 ✓ email
 
-Number of tests: 5.
-Passed: 4. Failed: 1.
+Number of tests: 3.
+Passed: 3. Failed: 0.
 ```
