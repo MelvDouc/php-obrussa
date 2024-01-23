@@ -1,0 +1,32 @@
+{
+  "name": "melvdouc/obrussa",
+  "type": "library",
+  "description": "A simple PHP unit test library.",
+  "keywords": [
+    "unit",
+    "test",
+    "tests"
+  ],
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "MelvDouc\\Obrussa\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MelvDouc\\ObrussaTests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "MelvDouc",
+      "email": "melv.douc@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {},
+  "scripts": {
+    "test": "php tests/index.php"
+  }
+}
