@@ -1,6 +1,6 @@
 <?php
 
-namespace MelvDouc\Obrussa;
+namespace MelvDouc\Obrussa\Exception;
 
 /**
  * @template T
@@ -19,10 +19,11 @@ class AssertionException extends \Exception
   /**
    * @param T $expected
    * @param T $actual
+   * @param string|null $message
    */
-  public function __construct($expected, $actual, string $message = "")
+  public function __construct($expected, $actual, ?string $message)
   {
-    parent::__construct($message);
+    parent::__construct($message ?? json_encode(["actual" => $actual, "expected" => $expected], JSON_UNESCAPED_SLASHES));
     $this->expected = $expected;
     $this->actual = $actual;
   }
