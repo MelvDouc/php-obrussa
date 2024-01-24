@@ -69,7 +69,7 @@ class Expecter
   // STRINGS
   // ===== ===== ===== ===== =====
 
-  public function toBeOfLength(int $length, ?string $message = null): void
+  public function toHaveLength(int $length, ?string $message = null): void
   {
     $this->assert("assertLength", "assertNotLength", $this->value, $length, $message);
   }
@@ -97,6 +97,16 @@ class Expecter
   // ===== ===== ===== ===== =====
   // OBJECTS
   // ===== ===== ===== ===== =====
+
+  public function toContain(mixed $element, ?string $message = null)
+  {
+    $this->assert("assertContains", "assertNotContains", $this->value, $element, $message);
+  }
+
+  public function toHaveCount(int $count, ?string $message = null)
+  {
+    $this->assert("assertCount", "assertNotCount", $this->value, $count, $message);
+  }
 
   public function toBeInstanceOf(string $className, ?string $message = null): void
   {

@@ -23,6 +23,14 @@ TestSuite::test("2 + 2 != 22", function (TestSuite $testSuite) {
   $testSuite->expect($result)->not()->toEqual(22);
 });
 
+TestSuite::test("arrays", function (TestSuite $testSuite) {
+  $arr = [1, 2, 3];
+  $testSuite->assertTruthy($arr);
+  $testSuite->assertType($arr, gettype([]));
+  $testSuite->expect($arr)->toHaveCount(3);
+  $testSuite->expect($arr)->not()->toContain(0);
+});
+
 TestSuite::test("instanceof", function (TestSuite $testSuite) {
   $testSuite->expect($testSuite)->toBeInstanceOf(TestSuite::class);
   $testSuite->expect($testSuite)->not()->toBeInstanceOf(\stdClass::class);

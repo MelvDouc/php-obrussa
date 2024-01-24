@@ -50,8 +50,7 @@ class TestSuite
     $numberOfTests = count(self::$tests);
     $passCount = $numberOfTests - $failCount;
     echo Colorizer::cyan("\nNumber of tests: $numberOfTests.\n");
-    echo Colorizer::green("Passed: $passCount. ");
-    echo Colorizer::red("Failed: $failCount.\n");
+    echo Colorizer::green("Passed: $passCount.") . " " . Colorizer::red("Failed: $failCount.\n");
   }
 
   protected function __construct()
@@ -95,6 +94,30 @@ class TestSuite
   public function assertNotEquals(mixed $actual, mixed $expected, ?string $message = null): void
   {
     $this->assert($actual !== $expected, $message ?? "$actual should not be equal to $expected.");
+  }
+
+  // ===== ===== ===== ===== =====
+  // TYPES
+  // ===== ===== ===== ===== =====
+
+  public function assertType(mixed $value, string $type, ?string $message = null): void
+  {
+    $this->assertEquals(gettype($value), $type, $message ?? "Value is not of type \"$type\".");
+  }
+
+  public function assertNotType(mixed $value, string $type, ?string $message = null): void
+  {
+    $this->assertNotEquals(gettype($value), $type, $message ?? "Value is of type \"$type\".");
+  }
+
+  public function assertInstanceOf(object $object, string $className, ?string $message = null): void
+  {
+    $this->assert($object instanceof $className, $message ?? "Object should be an instance of $className.");
+  }
+
+  public function assertNotInstanceOf(object $object, string $className, ?string $message = null): void
+  {
+    $this->assert(!($object instanceof $className), $message ?? "Object should not be an instance of $className.");
   }
 
   // ===== ===== ===== ===== =====
@@ -188,17 +211,27 @@ class TestSuite
   }
 
   // ===== ===== ===== ===== =====
-  // MISC
+  // ARRAYS
   // ===== ===== ===== ===== =====
 
-  public function assertInstanceOf(object $object, string $className, ?string $message = null): void
+  public function assertContains(array $arr, mixed $element, ?string $message = null)
   {
-    $this->assert($object instanceof $className, $message ?? "Object should be an instance of $className.");
+    $this->assert(in_array($element, $arr), $message ?? "Array should contain specified element.");
   }
 
-  public function assertNotInstanceOf(object $object, string $className, ?string $message = null): void
+  public function assertNotContains(array $arr, mixed $element, ?string $message = null)
   {
-    $this->assert(!($object instanceof $className), $message ?? "Object should not be an instance of $className.");
+    $this->assert(!in_array($element, $arr), $message ?? "Array should not contain specified element.");
+  }
+
+  public function assertCount(array $arr, int $count, ?string $message = null)
+  {
+    $this->assert(count($arr) === $count, $message ?? "Array should be of length $count.");
+  }
+
+  public function assertNotCount(array $arr, int $count, ?string $message = null)
+  {
+    $this->assert(count($arr) !== $count, $message ?? "Array should not be of length $count.");
   }
 
   // ===== ===== ===== ===== =====
