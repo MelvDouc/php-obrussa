@@ -42,6 +42,55 @@ class Expecter
   }
 
   // ===== ===== ===== ===== =====
+  // TYPES
+  // ===== ===== ===== ===== =====
+
+  public function toBeOfType(string $type, ?string $message = null)
+  {
+    $this->assert("assertType", "assertNotType", $this->value, $type);
+  }
+
+  public function toBeBoolean(?string $message = null)
+  {
+    $this->toBeOfType("bool", $message);
+  }
+
+  public function toBeInteger(?string $message = null)
+  {
+    $this->toBeOfType("int", $message);
+  }
+
+  public function toBeFloat(?string $message = null)
+  {
+    $this->toBeOfType("double", $message);
+  }
+
+  public function toBeString(?string $message = null)
+  {
+    $this->toBeOfType("string", $message);
+  }
+
+  public function toBeArray(?string $message = null)
+  {
+    $this->toBeOfType("array", $message);
+  }
+
+  public function toBeObject(?string $message = null)
+  {
+    $this->toBeOfType("object", $message);
+  }
+
+  public function toBeNull(?string $message = null)
+  {
+    $this->toEqual(null, $message);
+  }
+
+  public function toBeInstanceOf(string $className, ?string $message = null): void
+  {
+    $this->assert("assertInstanceOf", "assertNotInstanceOf", $this->value, $className, $message);
+  }
+
+  // ===== ===== ===== ===== =====
   // MATH
   // ===== ===== ===== ===== =====
 
@@ -69,7 +118,7 @@ class Expecter
   // STRINGS
   // ===== ===== ===== ===== =====
 
-  public function toBeOfLength(int $length, ?string $message = null): void
+  public function toHaveLength(int $length, ?string $message = null): void
   {
     $this->assert("assertLength", "assertNotLength", $this->value, $length, $message);
   }
@@ -95,12 +144,22 @@ class Expecter
   }
 
   // ===== ===== ===== ===== =====
-  // OBJECTS
+  // ARRAYS
   // ===== ===== ===== ===== =====
 
-  public function toBeInstanceOf(string $className, ?string $message = null): void
+  public function toContain(mixed $element, ?string $message = null)
   {
-    $this->assert("assertInstanceOf", "assertNotInstanceOf", $this->value, $className, $message);
+    $this->assert("assertContains", "assertNotContains", $this->value, $element, $message);
+  }
+
+  public function toHaveKey(int|string $key, ?string $message = null)
+  {
+    $this->assert("assertHasKey", "assertNotHasKey", $this->value, $key, $message);
+  }
+
+  public function toHaveCount(int $count, ?string $message = null)
+  {
+    $this->assert("assertCount", "assertNotCount", $this->value, $count, $message);
   }
 
   // ===== ===== ===== ===== =====

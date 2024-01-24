@@ -14,13 +14,22 @@ TestSuite::test("1 + 1 = 2", function (TestSuite $testSuite) {
 });
 
 TestSuite::test("2 + 2 = 5", function (TestSuite $testSuite) {
-  $testSuite->assert(add(2, 2) === 5, "2+2 is 4");
+  $testSuite->assert(add(2, 2) === 5);
 });
 
 TestSuite::test("2 + 2 != 22", function (TestSuite $testSuite) {
   $result = add(2, 2);
   $testSuite->expect($result)->toBeGreaterThan(3.9);
   $testSuite->expect($result)->not()->toEqual(22);
+});
+
+TestSuite::test("arrays", function (TestSuite $testSuite) {
+  $arr = [1, 2, 3];
+  $testSuite->assertTruthy($arr);
+  $testSuite->assertType($arr, gettype([]));
+  $testSuite->expect($arr)->toHaveCount(3);
+  $testSuite->expect($arr)->toHaveKey(0);
+  $testSuite->expect($arr)->not()->toContain(0);
 });
 
 TestSuite::test("instanceof", function (TestSuite $testSuite) {
